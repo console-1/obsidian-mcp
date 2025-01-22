@@ -117,7 +117,9 @@ Examples:
 ## Best Practices
 
 ### Input Validation
+
 ✅ DO:
+
 - Use strict schemas with `.strict()`
 - Provide clear error messages for validation
 - Include descriptions for all parameters
@@ -175,6 +177,7 @@ const schema = z.object({
 When designing schemas:
 
 ✅ DO:
+
 - Break down complex schemas into smaller, focused schemas
 - Use discriminated unions for operations with different requirements
 - Keep validation logic simple and explicit
@@ -182,6 +185,7 @@ When designing schemas:
 - Use literal types for precise operation matching
 
 ❌ DON'T:
+
 ```typescript
 // Don't use complex refinements that access parent data
 schema.superRefine((val, ctx) => {
@@ -208,12 +212,15 @@ const schema = z.object({
 ```
 
 ### Error Handling
+
 ✅ DO:
+
 - Use utility functions for common errors
 - Convert filesystem errors to McpErrors
 - Provide specific error messages
 
 ❌ DON'T:
+
 ```typescript
 // Don't throw raw errors
 catch (error) {
@@ -227,12 +234,15 @@ handler: async (args) => {
 ```
 
 ### Response Formatting
+
 ✅ DO:
+
 - Use response utility functions
 - Return standardized result objects
 - Include relevant operation details
 
 ❌ DON'T:
+
 ```typescript
 // Don't return raw strings
 return createToolResponse("Done"); // Too vague
@@ -244,12 +254,15 @@ return {
 ```
 
 ### Code Organization
+
 ✅ DO:
+
 - Split complex logic into smaller functions
 - Use utility functions for common operations
 - Keep the tool factory function clean
 
 ❌ DON'T:
+
 ```typescript
 // Don't mix concerns in the handler
 handler: async (args) => {
@@ -271,12 +284,14 @@ When creating schemas, remember they need to be converted to JSON Schema for the
 ### JSON Schema Compatibility
 
 ✅ DO:
+
 - Test your schemas with the `createSchemaHandler` utility
 - Use standard Zod types that have clear JSON Schema equivalents
 - Structure complex validation using composition of simple schemas
 - Verify generated JSON Schema matches expected validation rules
 
 ❌ DON'T:
+
 - Rely heavily on refinements that don't translate to JSON Schema
 - Use complex validation logic that can't be represented in JSON Schema
 - Access parent context in nested validations
